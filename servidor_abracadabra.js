@@ -2,7 +2,9 @@ const express = require('express');
 const app = express();
 const path = require("path");
 
+
 app.use(express.static(path.join(__dirname + "/assets")));
+
 
 const nombres = [
   "Juan",
@@ -13,6 +15,7 @@ const nombres = [
   "Javier",
   "Brian"
 ];
+
 
 // Middleware para verificar existencia del usuario
 app.use('/abracadabra/juego/:usuario', (req, res, next) => {
@@ -25,16 +28,21 @@ app.use('/abracadabra/juego/:usuario', (req, res, next) => {
   }
 });
 
+
+
 // Ruta específica para la página de inicio
 app.get('/abracadabra/juego/:usuario', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
+
+
 
 // Ruta para obtener usuarios
 app.get('/abracadabra/usuarios', (req, res) => {
   res.send({nombres});
   
 });
+
 
 
 // Ruta para jugar y mostrar conejo o Voldemort
@@ -49,6 +57,7 @@ app.get('/abracadabra/conejo/:n', (req, res) => {
 });
 
 
+
 //No encuentra la ruta
 app.get('*', (req, res) => {
   res.status(404).send(`
@@ -57,6 +66,8 @@ app.get('*', (req, res) => {
   <img src="varaMago.jpg" alt="mago"/>
   </div>`);
 })
+
+
 
 // Iniciar servidor
 app.listen(3000, () => {
